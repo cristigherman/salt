@@ -30,6 +30,7 @@ def salt_mm_master_config(request, salt_factories):
         config_defaults = yaml.deserialize(rfh.read())
 
     config_defaults["root_dir"] = root_dir.strpath
+    config_defaults["transport"] = request.config.getoption("--transport")
 
     config_overrides = {
         "file_roots": {
@@ -97,6 +98,7 @@ def salt_mm_sub_master_config(request, salt_factories, salt_mm_master):
     root_dir = salt_factories._get_root_dir_for_daemon("mm-master")
 
     config_defaults["root_dir"] = root_dir.strpath
+    config_defaults["transport"] = request.config.getoption("--transport")
 
     config_overrides = {
         "file_roots": {
